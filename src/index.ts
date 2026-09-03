@@ -36,4 +36,20 @@ app.all('/proxy', async c => {
     })
 })
 
+app.get('/replace', async c => {
+    const url = c.req.query('url')
+    if (!url) return c.body(null, 404)
+
+    const oldStr = c.req.query('old')
+    if (!oldStr) return c.body(null, 404)
+
+    const newStr = c.req.query('new')
+    if (!newStr) return c.body(null, 404)
+
+    const response = await fetch(url)
+    const text = await response.text()
+
+    return c.text(text.replaceAll(oldStr, newStr))
+})
+
 export default app
