@@ -33,10 +33,11 @@ for module_file in [item for item in modules_dir.glob("*.py") if item.is_file()]
     abs_path = module_file.absolute().__str__()
     module_name = "mod_" + md5(abs_path.encode("utf-8")).hexdigest()
     spec = spec_from_file_location(module_name, abs_path)
-    if not spec:
+    if not spec or not spec.loader:
         continue
 
     module = module_from_spec(spec)
+    spec.loader.exec_module(module)
     if not hasattr(module, "Module"):
         continue
 
