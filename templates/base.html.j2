@@ -24,8 +24,16 @@
 
 <body>
     <div style="margin: 10px;">
+        <ul style="display: none;" id="back-home">
+            <li><a href="/">back home</a></li>
+        </ul>
         {% block body %}{% endblock %}
     </div>
+    <script>
+        if (window.location.pathname !== "/") {
+            document.getElementById("back-home").style.display = "block"
+        }
+    </script>
 </body>
 
 </html>
