@@ -1,0 +1,22 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+    Proxy
+{% endblock %}
+
+{% block body %}
+    <div style="display: flex; align-items: center; column-gap: 5px">
+        <input style="flex: 1;" id="url-input" type="url" />
+        <button type="button" onclick="proxy()">代理</button>
+    </div>
+    <script>
+        const proxy = () => {
+            const urlInput = document.getElementById("url-input")
+
+            const url = new URL(window.location.href)
+            url.searchParams.set("url", urlInput.value)
+
+            window.location.href = url.toString()
+        }
+    </script>
+{% endblock %}
