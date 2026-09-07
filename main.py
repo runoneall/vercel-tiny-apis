@@ -1,11 +1,12 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
 @app.get("/")
 def index():
-    return "vercel-tiny-apis"
+    pages: list[str] = [rule.rule for rule in app.url_map.iter_rules() if rule.methods and "GET" in rule.methods and "<" not in rule.rule]
+    return render_template("index.html.j2", pages=pages)
 
 
 if __name__ == "__main__":
