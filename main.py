@@ -1,12 +1,10 @@
 from flask import Flask, render_template
 from flask_compress import Compress
-from flask_htmlmin import HTMLMIN
+from flask_minify import minify
 
 app = Flask(__name__)
-app.config["MINIFY_PAGE"] = True
-
 Compress(app)
-HTMLMIN(app)
+minify(app)
 
 
 @app.get("/")
