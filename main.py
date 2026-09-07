@@ -5,10 +5,12 @@ import pathlib
 from flask import Flask, render_template
 from flask_compress import Compress
 from flask_minify import minify
+from flask_cors import CORS
 
 app = Flask(__name__)
 Compress(app)
 minify(app)
+CORS(app)
 
 
 @app.get("/")

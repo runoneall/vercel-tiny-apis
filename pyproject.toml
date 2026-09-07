@@ -2,4 +2,10 @@
 name = "vercel-tiny-apis"
 version = "0.1.0"
 requires-python = "==3.12.*"
-dependencies = ["flask", "flask-compress", "flask-minify", "requests"]
+dependencies = [
+    "flask",
+    "flask-compress",
+    "flask-minify",
+    "requests",
+    "flask-cors",
+]
