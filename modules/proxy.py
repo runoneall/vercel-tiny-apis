@@ -4,7 +4,7 @@ import requests
 
 class Module:
     def __init__(self, app: Flask) -> None:
-        router = Blueprint("proxy", __name__)
+        router = Blueprint("proxy", __name__, url_prefix="/proxy")
         router.route("/", methods=["GET", "POST", "PUT", "DELETE"])(self.proxy)
         app.register_blueprint(router)
 
