@@ -8,4 +8,5 @@ dependencies = [
     "flask-minify",
     "requests",
     "flask-cors",
+    "static-ffmpeg",
 ]

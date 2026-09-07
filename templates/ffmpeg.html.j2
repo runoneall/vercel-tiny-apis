@@ -1,0 +1,20 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+    FFmpeg
+{% endblock %}
+
+{% block body %}
+    <style>
+        form {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+        }
+    </style>
+    <form action="/ffmpeg/convert" method="post" enctype="multipart/form-data">
+        <input type="file" id="file" name="file" required>
+        <input type="text" id="format" name="format" placeholder="mp4" required>
+        <button type="submit">Convert</button>
+    </form>
+{% endblock %}
