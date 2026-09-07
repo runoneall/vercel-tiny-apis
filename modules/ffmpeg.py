@@ -4,9 +4,6 @@ import subprocess
 import tempfile
 
 from flask import Blueprint, Flask, after_this_request, render_template, request, send_file
-import static_ffmpeg
-
-static_ffmpeg.add_paths()
 
 
 class Module:
@@ -34,7 +31,7 @@ class Module:
 
         file.save(input_path)
 
-        command = ["ffmpeg", "-y", "-i", input_path, output_path]
+        command = ["bin/ffmpeg", "-y", "-i", input_path, output_path]
         subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         return send_file(output_path, as_attachment=True, download_name=f"converted.{output_format}")
