@@ -3,15 +3,15 @@ import shutil
 import subprocess
 import tempfile
 
-from flask import Blueprint, Flask, after_this_request, render_template, request, send_file
+from flask import Blueprint, after_this_request, render_template, request, send_file
 
 
 class Module:
-    def __init__(self, app: Flask) -> None:
-        router = Blueprint("ffmpeg", __name__, url_prefix="/ffmpeg")
+    scope = "ffmpeg"
+
+    def __init__(self, router: Blueprint) -> None:
         router.get("/")(self.webui)
         router.post("/convert")(self.convert)
-        app.register_blueprint(router)
 
     def webui(self):
         return render_template("ffmpeg.html.j2")

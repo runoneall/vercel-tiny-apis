@@ -2,7 +2,7 @@ from hashlib import md5
 from importlib.util import module_from_spec, spec_from_file_location
 import pathlib
 
-from flask import Flask, render_template
+from flask import Blueprint, Flask, render_template
 from flask_compress import Compress
 from flask_minify import minify
 from flask_cors import CORS
@@ -27,7 +27,9 @@ if not modules_dir.exists():
 
 
 class ModuleEntry:
-    def __init__(self, app: Flask) -> None:
+    scope: str
+
+    def __init__(self, router: Blueprint) -> None:
         pass
 
 
@@ -40,11 +42,15 @@ for module_file in [item for item in modules_dir.glob("*.py") if item.is_file()]
 
     module = module_from_spec(spec)
     spec.loader.exec_module(module)
-    if not hasattr(module, "Module"):
+    if not hasattr(module, "scope") or not hasattr(module, "Module"):
         continue
 
     entry: type[ModuleEntry] = module.Module
-    entry(app)
+    module_scope = entry.scope
+    router = Blueprint(module_scope, module_name, url_prefix="/" + module_scope)
+
+    app.register_blueprint(router)
+    entry(router)
 
 if __name__ == "__main__":
     app.run(debug=True)
