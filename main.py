@@ -42,7 +42,7 @@ for module_file in [item for item in modules_dir.glob("*.py") if item.is_file()]
 
     module = module_from_spec(spec)
     spec.loader.exec_module(module)
-    if not hasattr(module, "scope") or not hasattr(module, "Module"):
+    if not hasattr(module, "Module") or not hasattr(module.Module, "scope"):
         continue
 
     entry: type[ModuleEntry] = module.Module
