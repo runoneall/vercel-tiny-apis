@@ -24,7 +24,7 @@ class Module:
         for raw_line in resp.iter_lines():
             if raw_line:
                 line = raw_line.decode("utf-8")
-                if line.startswith("*"):
+                if line.startswith(("*", "#")):
                     continue
 
                 parts = line.split(",")
