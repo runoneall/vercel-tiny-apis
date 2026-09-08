@@ -6,6 +6,7 @@ import requests
 
 class VPNItem(TypedDict):
     hostname: str
+    country: str
     ip: str
     ping: int
     speed: int
@@ -31,6 +32,7 @@ class Module:
                 vpns.append(
                     {
                         "hostname": parts[0],
+                        "country": parts[6],
                         "ip": parts[1],
                         "ping": int(parts[3]),
                         "speed": int(parts[4]),
