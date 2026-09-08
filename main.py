@@ -49,8 +49,8 @@ for module_file in [item for item in modules_dir.glob("*.py") if item.is_file()]
     module_scope = entry.scope
     router = Blueprint(module_scope, module_name, url_prefix="/" + module_scope)
 
-    app.register_blueprint(router)
     entry(router)
+    app.register_blueprint(router)
 
 if __name__ == "__main__":
     app.run(debug=True)
