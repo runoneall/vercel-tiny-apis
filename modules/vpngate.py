@@ -29,13 +29,24 @@ class Module:
                     continue
 
                 parts = line.split(",")
+
+                try:
+                    ping = int(parts[3])
+                except:
+                    ping = 999999
+
+                try:
+                    speed = int(parts[4])
+                except:
+                    speed = 0
+
                 vpns.append(
                     {
                         "hostname": parts[0],
                         "country": parts[6],
                         "ip": parts[1],
-                        "ping": int(parts[3]),
-                        "speed": int(parts[4]),
+                        "ping": ping,
+                        "speed": speed,
                     }
                 )
 
