@@ -18,8 +18,10 @@ class Module:
             path = "/" + path
 
         resp = requests.get(url=self.base_api + path)
+        body = resp.text.replace("|", "-")
+
         return Response(
-            resp.content,
+            body,
             status=resp.status_code,
             content_type=resp.headers.get("content-type"),
         )
