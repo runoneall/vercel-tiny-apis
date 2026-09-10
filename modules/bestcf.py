@@ -14,8 +14,8 @@ class Module:
         return render_template("bestcf.html.j2")
 
     def converter(self, path: str):
-        path = path.replace(self.base_api, "")
-        path += "/" if not path.endswith("/") else ""
+        if not path.startswith("/"):
+            path = "/" + path
 
         resp = requests.get(url=self.base_api + path)
         return Response(
