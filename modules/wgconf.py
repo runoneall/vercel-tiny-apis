@@ -34,13 +34,20 @@ class Module:
         wc = wgconfig.WGConfig(wc_file)
         wc.read_file()
 
+        postup_cmds: list[str] = []
+        postdown_cmds: list[str] = []
+
         if ipv4:
-            wc.add_attr(None, "PostUp", f"ip -4 rule add from {ipv4} lookup main", append_as_line=True)
-            wc.add_attr(None, "PostDown", f"ip -4 rule delete from {ipv4} lookup main", append_as_line=True)
+            postup_cmds.append(f"ip -4 rule add from {ipv4} lookup main")
+            postdown_cmds.append(f"ip -4 rule delete from {ipv4} lookup main")
 
         if ipv6:
-            wc.add_attr(None, "PostUp", f"ip -6 rule add from {ipv6} lookup main", append_as_line=True)
-            wc.add_attr(None, "PostDown", f"ip -6 rule delete from {ipv6} lookup main", append_as_line=True)
+            postup_cmds.append(f"ip -6 rule add from {ipv6} lookup main")
+            postdown_cmds.append(f"ip -6 rule delete from {ipv6} lookup main")
+
+        if ipv4 or ipv6:
+            wc.add_attr(None, "PostUp", " && ".join(postup_cmds))
+            wc.add_attr(None, "PostDown", " && ".join(postdown_cmds))
 
         wc.write_file()
         return send_file(wc_file, as_attachment=True, download_name=wc_file_name)
