@@ -1,0 +1,20 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+    BestCF
+{% endblock %}
+
+{% block body %}
+    <div style="display: flex; align-items: center; column-gap: 5px">
+        <input style="flex: 1;" id="path-input" type="text" required />
+        <button type="button" onclick="convert()">转换</button>
+    </div>
+    <script>
+        const convert = () => {
+            const pathInput = document.getElementById("path-input")
+            const url = new URL(window.location.href)
+            url.pathname += pathInput.value
+            window.location.href = url.toString()
+        }
+    </script>
+{% endblock %}
