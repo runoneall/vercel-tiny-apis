@@ -46,8 +46,8 @@ class Module:
             postdown_cmds.append(f"ip -6 rule delete from {ipv6} lookup main")
 
         if ipv4 or ipv6:
-            wc.add_attr(None, "PostUp", " && ".join(postup_cmds))
-            wc.add_attr(None, "PostDown", " && ".join(postdown_cmds))
+            wc.add_attr(None, "PostUp", " ; ".join(postup_cmds))
+            wc.add_attr(None, "PostDown", " ; ".join(postdown_cmds))
 
         wc.write_file()
         return send_file(wc_file, as_attachment=True, download_name=wc_file_name)
