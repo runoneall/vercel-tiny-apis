@@ -35,12 +35,12 @@ class Module:
         wc.read_file()
 
         if ipv4:
-            wc.add_attr(None, "PostUp", f"ip -4 rule add from {ipv4} lookup main")
-            wc.add_attr(None, "PostDown", f"ip -4 rule delete from {ipv4} lookup main")
+            wc.add_attr(None, "PostUp", f"ip -4 rule add from {ipv4} lookup main", append_as_line=True)
+            wc.add_attr(None, "PostDown", f"ip -4 rule delete from {ipv4} lookup main", append_as_line=True)
 
         if ipv6:
-            wc.add_attr(None, "PostUp", f"ip -6 rule add from {ipv6} lookup main")
-            wc.add_attr(None, "PostDown", f"ip -6 rule delete from {ipv6} lookup main")
+            wc.add_attr(None, "PostUp", f"ip -6 rule add from {ipv6} lookup main", append_as_line=True)
+            wc.add_attr(None, "PostDown", f"ip -6 rule delete from {ipv6} lookup main", append_as_line=True)
 
         wc.write_file()
         return send_file(wc_file, as_attachment=True, download_name=wc_file_name)
