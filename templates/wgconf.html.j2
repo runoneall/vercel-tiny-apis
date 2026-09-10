@@ -1,0 +1,21 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+    WGConf
+{% endblock %}
+
+{% block body %}
+    <style>
+        form {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+        }
+    </style>
+    <form action="/wgconf/gen" method="post" enctype="multipart/form-data">
+        <input type="file" id="file" name="file" required>
+        <input type="text" id="ipv4" name="ipv4" placeholder="127.0.0.1">
+        <input type="text" id="ipv6" name="ipv6" placeholder="::1">
+        <button type="submit">Gen</button>
+    </form>
+{% endblock %}
