@@ -1,0 +1,32 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+    Warp MASQUE BestIP
+{% endblock %}
+
+{% block body %}
+    <style>
+        form {
+            display: flex;
+            align-items: center;
+            column-gap: 5px;
+        }
+    </style>
+    <form action="" method="get">
+        <label>IPs: <input type="number" name="ips" required></label>
+        <label>Level:
+            <select name="level">
+                <option value="all">all</option>
+                <option value="p0">p0</option>
+            </select>
+        </label>
+        <label>Port:
+            <select name="port">
+                <option value="random">random</option>
+                <option value="443">443</option>
+                <option value="8443">8443</option>
+            </select>
+        </label>
+        <button type="submit">Get</button>
+    </form>
+{% endblock %}
