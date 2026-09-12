@@ -1,0 +1,27 @@
+{% extends 'base.html.j2' %}
+
+{% block title %}
+    Best CF IPs
+{% endblock %}
+
+{% block body %}
+    <div style="display: flex; align-items: center; column-gap: 5px">
+        <select style="flex: 1;" id="num-select" name="num-select" required>
+            <option value="all">all</option>
+            <option value="all">top20</option>
+            <option value="all">top50</option>
+            <option value="all">top100</option>
+            <option value="all">top200</option>
+            <option value="all">top400</option>
+        </select>
+        <button type="button" onclick="get()">获取</button>
+    </div>
+    <script>
+        const get = () => {
+            const numSelect = document.getElementById("num-select")
+            const url = new URL(window.location.href)
+            url.pathname = "/best-cf-ips/" + numSelect.value
+            window.location.href = url.toString()
+        }
+    </script>
+{% endblock %}
